@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MeuSaldo: organize seu dinheiro</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ 
+  <!-- Seção 1: Cabeçalho -->
+  <header class="topo" id="inicio">
+    <div class="topo-conteudo">
+      <p class="marca">Meu<span>Saldo</span></p>
+      <nav class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#planejamento">Meu planejamento</a>
+        <a href="#educacao">Educação financeira</a>
+        <a href="#metas">Minhas metas</a>
+      </nav>
+    </div>
+  </header>
+    <main>
+    <!-- Seção 2: Apresentação -->
+    <section class="apresentacao">
+      <p class="selo">Organize seu dinheiro. Planeje seu futuro.</p>
+      <h1>Cuide do seu dinheiro. Construa seu futuro.</h1>
+      <p>Descubra para onde seu dinheiro está indo, organize seus gastos
+         e planeje melhor suas escolhas financeiras.</p>
+      <a class="botao" href="#planejamento">Começar meu planejamento</a>
+    </section>
+ 
+    <!-- Seção 3: Como dividir o dinheiro -->
+    <section class="secao" id="regra">
+      <h2>Como dividir o dinheiro: a regra 50/30/20</h2>
+      <p class="intro">Uma referência educativa para começar, e não uma
+         regra obrigatória. Aqui, os percentuais valem sobre a renda.</p>
+      <div class="grade-3">
+        <article class="cartao">
+          <p class="numero">50%</p>
+          <h3>Necessidades</h3>
+          <p>Moradia, alimentação, água e energia, transporte, saúde
+             e outras despesas essenciais.</p>
+        </article>
+        <article class="cartao">
+          <p class="numero">30%</p>
+                    <h3>Desejos</h3>
+          <p>Lazer, passeios, compras pessoais, entretenimento e outras
+             despesas não essenciais.</p>
+        </article>
+        <article class="cartao">
+          <p class="numero verde">20%</p>
+          <h3>Futuro financeiro</h3>
+          <p>Reserva de emergência, objetivos financeiros e investimentos
+             adequados ao perfil de cada pessoa.</p>
+        </article>
+      </div>
+      <p class="nota">Adapte a divisão quando o salário é baixo, os gastos
+         essenciais são altos ou existem dívidas. Atenção: na calculadora,
+         a divisão é aplicada ao <strong>dinheiro que sobra depois dos
+         gastos fixos</strong>, e não sobre o salário.</p>
+    </section>
+ 
+    <!-- Seções 4 e 5: este formulário envia tudo ao Python -->
+    <form id="planejador" method="post" action="/#resumo" novalidate>
+      <!-- Botão escondido: é ele que a tecla Enter aciona -->
+      <button type="submit" name="acao" value="calcular"
+              class="oculto" tabindex="-1">Calcular</button>
+                    <!-- Seção 4: Calculadora financeira -->
+      <section class="secao" id="planejamento">
+        <h2>Meu planejamento</h2>
+        <p class="intro">Informe sua renda e seus gastos fixos. O Python
+           faz os cálculos e devolve o resumo.</p>
+ 
+        <div class="calculadora">
+          <fieldset class="cartao">
+            <legend>A. Renda mensal</legend>
+            <label>Salário líquido mensal (R$)
+              <input type="text" name="salario" value="{{SALARIO}}"
+                     inputmode="decimal" placeholder="Ex.: 3000,00">
+            </label>
+            <label>Outras rendas mensais (opcional)
+              <input type="text" name="outras" value="{{OUTRAS}}"
+                     inputmode="decimal" placeholder="Ex.: 200,00">
+            </label>
+            <label class="marcar">
+              <input type="checkbox" name="dividas" value="sim" {{DIVIDAS}}>
+              Tenho dívidas em atraso ou parcelas difíceis de pagar
+            </label>
+          </fieldset>
+                    <fieldset class="cartao" id="gastos">
+            <legend>B. Gastos fixos mensais</legend>
+            <p class="ajuda">Corrija os valores, remova o que não usa ou
+               adicione novos gastos.</p>
+            {{LINHAS_GASTOS}}
+            <button type="submit" name="acao" value="adicionar"
+                    formaction="/#gastos"
+                    class="botao-secundario">+ Adicionar gasto</button>
+          </fieldset>
+        </div>
+ 
+        <button type="submit" name="acao" value="calcular"
+                class="botao botao-grande">Calcular meu orçamento</button>
+ 
+        <!-- C. Resumo do orçamento -->
+        <div id="resumo" class="resumo-bloco">
+          <h3>C. Resumo do orçamento</h3>
+          {{AVISOS}}
+          <div class="grade-resumo">
+            <article class="indicador">
+              <p>Renda mensal total</p><strong>{{RENDA}}</strong>
+            </article>
+            <article class="indicador">
+              <p>Soma dos gastos fixos</p><strong>{{GASTOS}}</strong>
+                          </article>
+            <article class="indicador saldo {{CLASSE_SALDO}}">
+              <p>Saldo restante</p><strong>{{SALDO}}</strong>
+            </article>
+            <article class="indicador">
+              <p>Renda comprometida</p><strong>{{PERCENTUAL}}</strong>
+            </article>
+            <article class="indicador">
+              <p>Disponível para planejar</p><strong>{{DISPONIVEL}}</strong>
+            </article>
+          </div>
+        </div>
+      </section>
+ 
+      <!-- Seção 5: Distribuição do dinheiro restante -->
+      <section class="secao" id="distribuicao">
+        <h2>Distribuição do dinheiro restante</h2>
+        <p class="intro">Sugestão ilustrativa aplicada ao valor disponível
+           para planejar. A soma dos percentuais precisa ser 100%.</p>
+        {{AVISOS_DIST}}
+        <div class="grade-3">
+          <article class="cartao">
+            <h3>Reserva de emergência</h3>
+            <label>Percentual (%)
+                              <input type="number" name="pct_reserva"
+                     value="{{PCT_RESERVA}}" min="0" max="100">
+            </label>
+            <p class="valor">{{RESERVA}}</p>
+            <p>Dinheiro para imprevistos, como perda de renda ou uma
+               despesa inesperada.</p>
+          </article>
+          <article class="cartao">
+            <h3>Investimentos e metas</h3>
+            <label>Percentual (%)
+              <input type="number" name="pct_invest"
+                     value="{{PCT_INVEST}}" min="0" max="100">
+            </label>
+            <p class="valor">{{INVEST}}</p>
+            <p>Objetivos de médio e longo prazo, considerando riscos,
+               liquidez e necessidades pessoais.</p>
+          </article>
+          <article class="cartao">
+            <h3>Lazer e gastos variáveis</h3>
+            <label>Percentual (%)
+              <input type="number" name="pct_lazer"
+                     value="{{PCT_LAZER}}" min="0" max="100">
+            </label>
+            <p class="valor">{{LAZER}}</p>
+                        <p>Passeios, compras ocasionais, comer fora e outros gastos
+               do dia a dia.</p>
+          </article>
+        </div>
+        <p class="total">Total distribuído: <strong>{{TOTAL_DIST}}</strong></p>
+        <button type="submit" name="acao" value="calcular"
+                formaction="/#distribuicao"
+                class="botao">Recalcular distribuição</button>
+        <p class="nota">Esta distribuição é uma sugestão, não uma
+           recomendação financeira. Se você ainda não cadastrou gastos
+           importantes ou tem dívidas, revise o orçamento antes de investir.</p>
+      </section>
+    </form>
+ 
+    <!-- Seção 6: Regras para cuidar do dinheiro -->
+    <section class="secao" id="regras">
+      <h2>Regras para cuidar do dinheiro</h2>
+      <div class="grade-regras">
+        <article class="regra">
+          <h3>Gaste menos do que ganha</h3>
+          <p>Sempre que sua realidade permitir. Se entram R$ 2.000,00,
+             tente gastar menos do que isso para sobrar algo.</p>
+        </article>
+        <article class="regra">
+                      <h3>Conheça seus gastos</h3>
+          <p>Anote tudo por um mês antes de criar metas. Pequenos
+             gastos, como lanches, somam muito no fim do mês.</p>
+        </article>
+        <article class="regra">
+          <h3>Evite compras por impulso</h3>
+          <p>Espere um dia antes de comprar algo que não planejou.
+             Muitas vezes a vontade passa.</p>
+        </article>
+        <article class="regra">
+          <h3>Compare preços</h3>
+          <p>Pesquise em mais de uma loja. O mesmo produto pode custar
+             bem menos em outro lugar.</p>
+        </article>
+        <article class="regra">
+          <h3>Priorize o essencial</h3>
+          <p>Pague primeiro moradia, alimentação, contas e transporte.
+             Depois pense nos desejos.</p>
+        </article>
+        <article class="regra">
+          <h3>Cuidado com o cartão de crédito</h3>
+          <p>O cartão não é renda extra. Os juros do rotativo estão
+             entre os mais altos do mercado.</p>
+        </article>
+                <article class="regra">
+          <h3>Parcelas precisam caber</h3>
+          <p>Antes de parcelar, some as parcelas que você já tem e veja
+             se a nova cabe no orçamento.</p>
+        </article>
+        <article class="regra">
+          <h3>Tenha uma reserva</h3>
+          <p>Um valor guardado evita pegar empréstimo quando o celular
+             quebra ou surge um gasto de saúde.</p>
+        </article>
+        <article class="regra">
+          <h3>Pesquise antes de investir</h3>
+          <p>Entenda onde o dinheiro será aplicado, os riscos e quando
+             você poderá resgatar.</p>
+        </article>
+        <article class="regra">
+          <h3>Desconfie de lucro garantido</h3>
+          <p>Promessas de ganho alto, rápido e sem risco costumam ser
+             golpe.</p>
+        </article>
+        <article class="regra">
+          <h3>Metas realistas</h3>
+          <p>Uma meta que cabe no seu orçamento tem mais chance de ser
+             cumprida do que uma meta exagerada.</p>
+                     </article>
+        <article class="regra">
+          <h3>Revise todo mês</h3>
+          <p>Salário, preços e objetivos mudam. Reveja o planejamento
+             no início de cada mês.</p>
+        </article>
+      </div>
+    </section>
+ 
+    <!-- Seção 7: Educação financeira -->
+    <section class="secao" id="educacao">
+      <h2>Educação financeira</h2>
+      <div class="grade-3">
+        <article class="cartao">
+          <h3>O que é guardar dinheiro?</h3>
+          <p>É separar uma parte da renda antes de gastar, para
+             realizar objetivos e enfrentar imprevistos sem se
+             endividar.</p>
+        </article>
+        <article class="cartao">
+          <h3>O que é reserva de emergência?</h3>
+          <p>Um dinheiro só para emergências, como perda de emprego ou
+             conserto urgente. Deve ser fácil de acessar quando
+             necessário.</p>
+                     </article>
+        <article class="cartao">
+          <h3>O que significa investir?</h3>
+          <p>É aplicar dinheiro buscando um resultado no futuro. Todo
+             investimento tem regras, prazos e riscos que precisam ser
+             entendidos.</p>
+        </article>
+        <article class="cartao">
+          <h3>O que é liquidez?</h3>
+          <p>É a facilidade de transformar um investimento em dinheiro
+             disponível. Para emergências, a liquidez é muito
+             importante.</p>
+        </article>
+        <article class="cartao">
+          <h3>O que é rentabilidade?</h3>
+          <p>É quanto o dinheiro rende ao longo do tempo. Rentabilidade
+             passada não garante resultado futuro.</p>
+        </article>
+        <article class="cartao">
+          <h3>O que é risco financeiro?</h3>
+          <p>É a chance de o resultado ser diferente do esperado,
+             inclusive com perdas. Rentabilidade maior não é garantia
+             de retorno.</p>
+        </article>
+              </div>
+    </section>
+ 
+    <!-- Seção 8: Metas (os campos usam form="planejador") -->
+    <section class="secao" id="metas">
+      <h2>Minhas metas</h2>
+      <p class="intro">Uma boa meta tem <strong>objetivo</strong>,
+         <strong>valor</strong> e <strong>prazo</strong>. Exemplos: comprar
+         um computador, fazer um curso, montar a reserva de emergência,
+         viajar, comprar uma casa ou quitar dívidas.</p>
+      <div class="cartao meta">
+        <label>Objetivo
+          <input type="text" name="meta_nome" form="planejador"
+                 value="{{META_NOME}}" placeholder="Ex.: comprar um computador">
+        </label>
+        <label>Valor da meta (R$)
+          <input type="text" name="meta_valor" form="planejador"
+                 value="{{META_VALOR}}" inputmode="decimal"
+                 placeholder="Ex.: 3000,00">
+        </label>
+        <label>Prazo (meses)
+          <input type="number" name="meta_meses" form="planejador"
+                 value="{{META_MESES}}" min="1" placeholder="Ex.: 10">
+        </label>
+                <button type="submit" name="acao" value="meta" form="planejador"
+                formaction="/#metas" class="botao">Calcular meta</button>
+      </div>
+      {{RESULTADO_META}}
+    </section>
+  </main>
+ 
+  <!-- Seção 9: Rodapé -->
+  <footer class="rodape">
+    <p class="marca">Meu<span>Saldo</span></p>
+    <p>Organizar o dinheiro hoje é escolher com mais liberdade amanhã.</p>
+    <p class="aviso-legal">Conteúdo educativo. As informações não substituem
+       aconselhamento financeiro individual.</p>
+  </footer>
+</body>
+</html>

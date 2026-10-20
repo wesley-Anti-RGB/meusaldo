@@ -1,0 +1,316 @@
+/* 1. Cores e base da página */
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, Helvetica, sans-serif;
+  background: #f4f6fa;
+  color: #1c2a3a;
+  line-height: 1.5;
+}
+ 
+h1, h2, h3 { color: #0b2545; line-height: 1.25; }
+ 
+main {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+ 
+/* 2. Cabeçalho e navegação */
+.topo { background: #0b2545; }
+.topo-conteudo {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+ 
+.marca {
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  color: #ffffff;
+}
+ 
+.marca span { color: #4ade80; }
+.menu a {
+  color: #dbe4f0;
+  text-decoration: none;
+  margin-left: 18px;
+  font-size: 15px;
+}
+ 
+.menu a:hover { color: #ffffff; text-decoration: underline; }
+ 
+/* 3. Apresentação */
+.apresentacao { text-align: center; padding: 56px 10px 40px; }
+ 
+.selo {
+  display: inline-block;
+  background: #e3ebf6;
+  color: #0b2545;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 14px;
+}
+ 
+.apresentacao h1 { font-size: 40px; margin: 16px 0 10px; }
+.apresentacao p {
+  color: #5b6675;
+  font-size: 18px;
+  max-width: 640px;
+  margin: 0 auto 24px;
+}
+ 
+/* 4. Botões */
+.botao {
+  display: inline-block;
+  background: #0b2545;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 22px;
+  font-size: 16px;
+  font-family: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+ 
+.botao:hover { background: #13315c; }
+.botao-grande {
+  display: block;
+  width: 100%;
+  margin-top: 18px;
+  padding: 14px;
+  font-size: 17px;
+}
+ 
+.botao-secundario {
+  background: #ffffff;
+  color: #0b2545;
+  border: 1px dashed #0b2545;
+  border-radius: 8px;
+  padding: 10px;
+  width: 100%;
+  font-family: inherit;
+  cursor: pointer;
+}
+.botao-remover {
+  background: none;
+  border: 1px solid #d3d9e2;
+  border-radius: 8px;
+  color: #b42318;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+ 
+.oculto { position: absolute; left: -9999px; }
+ 
+/* 5. Seções e cartões */
+.secao { padding: 36px 0; border-top: 1px solid #e2e7ef; }
+ 
+.secao h2 { font-size: 28px; margin: 0 0 6px; }
+ 
+.intro { color: #5b6675; margin: 0 0 20px; }
+ 
+.cartao {
+  background: #ffffff;
+  border: 1px solid #e2e7ef;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 6px rgba(11, 37, 69, 0.06);
+}
+.cartao h3 { margin: 0 0 8px; font-size: 18px; }
+ 
+.cartao p { margin: 0; color: #5b6675; }
+ 
+.grade-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+ 
+.cartao .numero {
+  font-size: 36px;
+  font-weight: bold;
+  color: #0b2545;
+}
+ 
+.cartao .verde { color: #1a7f4b; }
+ 
+.nota {
+  background: #eef3fa;
+  border-radius: 10px;
+  padding: 14px 16px;
+  margin-top: 18px;
+  color: #33475b;
+}
+/* 6. Formulário da calculadora */
+.calculadora {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 18px;
+  align-items: start;
+}
+ 
+fieldset { margin: 0; }
+ 
+legend {
+  font-weight: bold;
+  color: #0b2545;
+  padding: 0 6px;
+}
+ 
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  color: #33475b;
+  margin-top: 12px;
+}
+input[type="text"],
+input[type="number"] {
+  display: block;
+  width: 100%;
+  margin-top: 6px;
+  padding: 10px 12px;
+  border: 1px solid #cdd5e0;
+  border-radius: 8px;
+  font-size: 15px;
+  font-family: inherit;
+}
+ 
+input:focus { outline: 2px solid #13315c; border-color: #13315c; }
+ 
+.marcar { font-weight: normal; }
+ 
+.marcar input { margin-right: 6px; }
+ 
+.ajuda { font-size: 14px; margin-bottom: 8px; }
+.gasto {
+  display: grid;
+  grid-template-columns: 1fr 130px auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+ 
+.gasto input { margin-top: 0; }
+ 
+/* 7. Resumo e mensagens */
+.resumo-bloco { margin-top: 28px; }
+ 
+.grade-resumo {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+}
+ 
+.indicador {
+  background: #ffffff;
+  border: 1px solid #e2e7ef;
+  border-radius: 12px;
+  padding: 14px;
+}
+.indicador p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  color: #5b6675;
+}
+ 
+.indicador strong { font-size: 20px; color: #0b2545; }
+ 
+.saldo.positivo { background: #e8f6ee; border-color: #1a7f4b; }
+ 
+.saldo.positivo strong { color: #1a7f4b; }
+ 
+.saldo.negativo { background: #fdecea; border-color: #b42318; }
+ 
+.saldo.negativo strong { color: #b42318; }
+ 
+.mensagem {
+  padding: 12px 14px;
+  border-radius: 8px;
+  margin: 0 0 10px;
+  font-size: 15px;
+}
+.mensagem.ok { background: #e8f6ee; color: #14532d; }
+.mensagem.info { background: #eef3fa; color: #1e3a5f; }
+.mensagem.alerta { background: #fff4e5; color: #8a4b08; }
+.mensagem.erro { background: #fdecea; color: #b42318; }
+ 
+/* 8. Distribuição, regras e metas */
+.cartao .valor {
+  font-size: 26px;
+  font-weight: bold;
+  color: #1a7f4b;
+  margin: 12px 0 6px;
+}
+ 
+.total { margin: 16px 0; color: #33475b; }
+ 
+.grade-regras {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+.regra {
+  background: #ffffff;
+  border-radius: 10px;
+  padding: 16px;
+  border: 1px solid #e2e7ef;
+}
+ 
+.regra h3 { font-size: 16px; margin: 0 0 6px; }
+ 
+.regra p {
+  margin: 0;
+  font-size: 14px;
+  color: #5b6675;
+}
+ 
+.meta {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 14px;
+}
+ 
+.meta label { margin-top: 0; }
+/* 9. Rodapé */
+.rodape {
+  background: #0b2545;
+  color: #dbe4f0;
+  text-align: center;
+  padding: 32px 20px;
+  margin-top: 40px;
+}
+ 
+.rodape p { margin: 6px 0; }
+ 
+.aviso-legal { font-size: 13px; color: #a9b8cc; }
+ 
+/* 10. Telas menores */
+@media (max-width: 900px) {
+  .grade-resumo { grid-template-columns: repeat(2, 1fr); }
+  .grade-regras { grid-template-columns: repeat(2, 1fr); }
+  .calculadora { grid-template-columns: 1fr; }
+}
+@media (max-width: 640px) {
+  .grade-3,
+  .grade-regras,
+  .grade-resumo,
+  .meta {
+    grid-template-columns: 1fr;
+  }
+ 
+  .apresentacao h1 { font-size: 30px; }
+  .menu a { margin: 0 12px 0 0; }
+  .gasto { grid-template-columns: 1fr 100px; }
+  .botao-remover { grid-column: 1 / -1; }
+}
